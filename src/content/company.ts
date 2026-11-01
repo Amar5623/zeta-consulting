@@ -1,11 +1,12 @@
 import {
-  Users,
   Layers,
-  Sparkles,
-  Rocket,
   KeyRound,
   ScanSearch,
-  Zap,
+  ShieldCheck,
+  Network,
+  Target,
+  ChartLine,
+  Globe,
   type LucideIcon,
 } from "lucide-react";
 
@@ -14,66 +15,66 @@ import {
  * Swap these for real achievements as you earn them, e.g. "Top rated on Clutch", "Featured on Behance".
  */
 export const heroHighlights: { icon: LucideIcon; text: string }[] = [
-  { icon: Zap, text: "First working release in 2–4 weeks" },
-  { icon: Sparkles, text: "AI agents built for production, not demos" },
-  { icon: Users, text: "Senior engineers and designers on every project" },
-  { icon: ScanSearch, text: "Built to rank on Google and in AI answers" },
+  { icon: Network, text: "Built around the systems you already use" },
+  { icon: ShieldCheck, text: "AI with human oversight, by design" },
+  { icon: ChartLine, text: "Measured against a baseline, not a promise" },
+  { icon: Globe, text: "Solutions for 12 industries, from maritime to marketplaces" },
   { icon: KeyRound, text: "You own 100% of the code and IP" },
 ];
 
-/** How Zeta works — shown on Home and About. */
+/** How Zeta works — the cross-industry delivery framework, shown on Home and About. */
 export const process = [
   {
     step: "01",
-    title: "Discover",
-    timing: "Week 1",
-    body: "We dig into your goals, users, constraints and data. You leave with a clear scope, known risks and a plan you can take to your board.",
-    outputs: ["Goals & success metrics", "Scope & estimate", "Risk register"],
+    title: "Discover & baseline",
+    timing: "Stage 1",
+    body: "Understand users, business processes, existing systems and constraints. Establish the current baseline and prioritize the highest-value problem.",
+    outputs: ["KPIs & baseline", "Priority problem", "Risk register"],
   },
   {
     step: "02",
-    title: "Design",
-    timing: "Weeks 1–3",
-    body: "Flows, prototypes and UI, tested with real users before any production code is written.",
-    outputs: ["User journeys", "Clickable prototype", "Design system"],
+    title: "Architect & validate",
+    timing: "Stage 2",
+    body: "Define the experience, system boundaries, integrations, security, data model and acceptance tests. Validate feasibility before committing to outcomes.",
+    outputs: ["Target architecture", "Prototypes", "Acceptance criteria"],
   },
   {
     step: "03",
-    title: "Build",
-    timing: "Weeks 2–8",
-    body: "Senior engineers ship in weekly increments. You see working software every week, not a status report.",
-    outputs: ["Weekly demos", "Automated tests", "Staging environment"],
+    title: "Build & integrate",
+    timing: "Stage 3",
+    body: "Deliver in controlled increments, integrating with existing systems where practical, with observability and automated tests built in.",
+    outputs: ["Working increments", "Integrations", "Test suites"],
   },
   {
     step: "04",
-    title: "Launch",
-    timing: "Launch week",
-    body: "Hardened, tested and deployed with monitoring, analytics and documentation in place from day one.",
-    outputs: ["Production release", "Monitoring & alerts", "Handover docs"],
+    title: "Pilot & measure",
+    timing: "Stage 4",
+    body: "Test against agreed criteria using representative workflows and real constraints. Compare with the baseline and document limitations.",
+    outputs: ["Pilot results", "Baseline comparison", "Go / adjust decision"],
   },
   {
     step: "05",
-    title: "Grow",
-    timing: "Ongoing",
-    body: "We measure, iterate and scale: new features, SEO and GEO programs, and AI improvements driven by real usage data.",
-    outputs: ["Growth roadmap", "Monthly reporting", "Continuous improvement"],
+    title: "Scale & optimize",
+    timing: "Stage 5",
+    body: "Expand based on evidence and readiness. Monitor reliability, adoption, cost, security and outcomes after launch.",
+    outputs: ["Rollout plan", "Monitoring", "Improvement backlog"],
   },
 ];
 
 export const values: { title: string; body: string; icon: LucideIcon }[] = [
-  { icon: Users, title: "Senior team only", body: "The people on your first call are the people building your product. No bait-and-switch." },
-  { icon: Layers, title: "One team, end to end", body: "Strategy, design, engineering, AI and growth under one roof, so nothing gets lost between vendors." },
-  { icon: Sparkles, title: "AI-first, not AI-washed", body: "We use AI where it measurably saves time or makes money, and tell you plainly where it doesn't." },
-  { icon: Rocket, title: "Shipping every week", body: "Working software every week and a shared board, so you always know exactly where things stand." },
-  { icon: KeyRound, title: "You own everything", body: "Code, designs, data and accounts belong to you from day one. No lock-in." },
+  { icon: Target, title: "Business-first engineering", body: "We start with bottlenecks, users, workflows and commercial goals — then choose technology to fit the outcome." },
+  { icon: Network, title: "Integration over replacement", body: "We extend your existing ERP, CRM, databases and operational systems wherever that's the practical path." },
+  { icon: ShieldCheck, title: "AI with human oversight", body: "We automate repeatable work and keep review and escalation for the exceptions that matter." },
+  { icon: Layers, title: "Architecture for real operations", body: "Designed for security, scale, resilience and the constraints of the environment it actually runs in." },
+  { icon: ChartLine, title: "Outcome-oriented delivery", body: "We set baselines and success criteria first, and measure results before making performance claims." },
   { icon: ScanSearch, title: "Built to be found", body: "Everything we ship is fast, accessible and structured for search engines and AI answers." },
 ];
 
 /** Commitments rather than vanity stats — adjust to what you can stand behind. */
 export const commitments = [
-  { value: 2, suffix: "–4 wks", label: "To a first working release" },
-  { value: 8, suffix: "", label: "Service lines, one accountable team" },
-  { value: 24, suffix: "h", label: "Response time on business days" },
+  { value: 12, suffix: "", label: "Industries with dedicated solution playbooks" },
+  { value: 10, suffix: "", label: "Service lines, one accountable team" },
+  { value: 5, suffix: "", label: "Stage delivery framework, baseline to scale" },
   { value: 100, suffix: "%", label: "Code & IP ownership for clients" },
 ];
 
@@ -128,7 +129,11 @@ export const stack = [
 export const faqs = [
   {
     q: "What kind of companies do you work with?",
-    a: "Startups building their first product, growing SaaS companies, and established businesses modernizing how they operate. If you have a clear problem and want a senior team to solve it, we're likely a good fit.",
+    a: "Startups validating a product, growing SaaS companies and established businesses across e-commerce, mobility, logistics, maritime, real estate, manufacturing, finance, education, healthcare and hospitality. If you have a clear problem and want a team that connects strategy, engineering and integration, we're likely a good fit.",
+  },
+  {
+    q: "Do we have to replace our existing systems?",
+    a: "Usually not. We look for practical ways to extend the ERP, CRM and operational systems you already have, and only recommend replacement when the audit shows it's the better path.",
   },
   {
     q: "How quickly can you start?",
@@ -152,7 +157,11 @@ export const faqs = [
   },
   {
     q: "Is AI actually right for my business?",
-    a: "Not always, and we'll tell you. We start with a short readiness assessment to find where AI saves real time or money, then run a pilot before you commit to a full build.",
+    a: "Not always, and we'll tell you. We recommend AI when it improves a defined workflow, and conventional automation or deterministic rules when those are more reliable. Where AI fits, we pilot it against a baseline before you commit to a full build.",
+  },
+  {
+    q: "Do you guarantee results?",
+    a: "We guarantee transparency, not outcomes we can't control. Every engagement agrees a baseline, targets, a measurement method and an owner up front, and we report measured results separately from targets still being validated.",
   },
   {
     q: "Do you offer support after launch?",

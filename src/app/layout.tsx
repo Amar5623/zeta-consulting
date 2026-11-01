@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { sans, serif } from "./fonts";
+import { brand, sans, serif } from "./fonts";
 import { site } from "@/content/site";
 import { services } from "@/content/services";
 import { jsonLd } from "@/lib/utils";
@@ -76,7 +76,7 @@ const organization = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable}`}>
+    <html lang="en" className={`${sans.variable} ${serif.variable} ${brand.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(organization)} />
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-white">

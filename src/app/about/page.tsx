@@ -8,7 +8,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { PageTransition } from "@/components/layout/page-transition";
 import { PageHero } from "@/components/sections/page-hero";
 import { Values } from "@/components/sections/values";
-import { Process } from "@/components/sections/process";
+import { DeliveryFramework } from "@/components/sections/delivery-framework";
 import { Statement } from "@/components/sections/statement";
 import { Parallax } from "@/components/motion/parallax";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
@@ -25,8 +25,8 @@ export default function AboutPage() {
     <PageTransition>
       <PageHero
         eyebrow="About Zeta"
-        title={["A small senior team", <span key="2" className="accent-serif">with a big remit.</span>]}
-        description="We started Zeta to be the partner we always wanted to hire: one team that can think through strategy, design the experience, engineer it properly and then make sure people find it."
+        title={["Build smarter systems.", <span key="2" className="accent-serif">Connect what you already use.</span>]}
+        description="Zeta Consulting partners with businesses to design, build, integrate and modernize the digital systems they depend on — solving real operational problems without automatically replacing the technology they already have."
       />
 
       <section className="px-2 pt-2 sm:px-3 sm:pt-3">
@@ -37,7 +37,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Story — placeholder copy, rewrite in your own words */}
+      {/* Story */}
       <section className="py-20 sm:py-28">
         <Container className="grid gap-12 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
@@ -46,18 +46,26 @@ export default function AboutPage() {
           <div className="flex flex-col gap-8 lg:col-span-8">
             <Reveal>
               <p className="text-h3 font-normal leading-snug">
-                Most companies juggle an agency for the website, a freelancer for the app, a consultant for AI and someone else for SEO. Things fall
-                between the cracks. <span className="accent-serif">We built Zeta to close those gaps.</span>
+                Technology that moves your business forward. We bring business strategy, software engineering, system integration and
+                intelligent automation together to <span className="accent-serif">solve complex operational challenges.</span>
               </p>
             </Reveal>
             <Reveal delay={0.1} className="grid gap-6 text-fg-muted sm:grid-cols-2">
               <p>
-                Placeholder. Tell the founding story here: who started Zeta, what you saw in the market, and the kind of work you set out to do. Keep it
-                specific and human; this is where trust starts.
+                We work with businesses across e-commerce, mobility, logistics, maritime, real estate, manufacturing, financial services,
+                education, healthcare, hospitality and enterprise software — designing custom web and mobile applications, scalable SaaS
+                products, AI-enabled workflows, industrial IoT solutions and integrations that connect existing systems.
               </p>
               <p>
-                Placeholder. Describe how you work today: team size, where you&apos;re based, the industries you know best, and what clients can expect in
-                the first 30 days of working with you.
+                We believe transformation should build on what already works. Rather than replacing established systems by default, we
+                extend their capabilities, improve workflows and introduce intelligence where it delivers measurable value — from
+                discovery and architecture through development, integration, deployment and optimization.
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p className="border-l-2 border-accent pl-4 text-lead">
+                Our focus is simple: better-connected systems, more effective operations and measurable progress toward the outcomes that
+                matter to your business.
               </p>
             </Reveal>
           </div>
@@ -114,7 +122,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <Process />
+      <DeliveryFramework />
 
       {/* Office */}
       <section className="py-20 sm:py-28">

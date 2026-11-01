@@ -23,9 +23,9 @@ export function FooterWordmark() {
           backgroundClip: "text",
           color: "transparent",
         }}
-        className="-mb-[0.18em] text-center text-[27vw] font-semibold leading-[0.8] tracking-[-0.07em]"
+        className="-mb-[0.12em] text-center font-brand text-[25vw] font-bold leading-[0.8] tracking-[-0.02em]"
       >
-        zeta
+        ZETA
       </motion.p>
     </div>
   );

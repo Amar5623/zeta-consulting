@@ -7,9 +7,10 @@ export const site = {
   shortName: "Zeta",
   legalName: "Zeta Consulting", // TODO: registered legal entity name (e.g. "Zeta Consulting Pvt. Ltd.")
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://zetaconsulting.com", // TODO: your domain
-  tagline: "AI, software & growth — one senior team.",
+  tagline: "Technology that moves your business forward.",
   description:
-    "Zeta Consulting is a full-service technology partner. We build AI agents, web platforms and mobile apps, modernize operations, and grow your visibility on Google and in AI answers.",
+    "Zeta Consulting designs, builds, integrates and modernizes the digital systems businesses depend on — custom web and mobile platforms, AI agents, industrial IoT, enterprise integrations and AI search visibility.",
+  positioning: "Build smarter systems. Connect what you already use. Turn operational complexity into measurable business value.",
 
   // Contact
   email: "hello@zetaconsulting.com", // TODO
@@ -41,6 +42,7 @@ export const site = {
 
 export const nav = [
   { label: "Services", href: "/services" },
+  { label: "Industries", href: "/industries" },
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
   { label: "Insights", href: "/insights" },

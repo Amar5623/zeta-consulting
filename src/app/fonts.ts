@@ -1,4 +1,4 @@
-import { Hanken_Grotesk, Instrument_Serif } from "next/font/google";
+import { Hanken_Grotesk, Instrument_Serif, Montserrat } from "next/font/google";
 // import localFont from "next/font/local";
 
 /**
@@ -28,5 +28,13 @@ export const serif = Instrument_Serif({
   weight: "400",
   style: ["normal", "italic"],
   variable: "--font-serif-family",
+  display: "swap",
+});
+
+/** Brand typeface from the Zeta logo system — used only for the logo wordmark. */
+export const brand = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-brand-family",
   display: "swap",
 });

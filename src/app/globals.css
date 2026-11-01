@@ -75,6 +75,7 @@
 @theme inline {
   --font-sans: var(--font-sans-family), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-serif: var(--font-serif-family), ui-serif, Georgia, serif;
+  --font-brand: var(--font-brand-family), var(--font-sans-family), ui-sans-serif, sans-serif;
 }
 
 /* ------------------------------------------------------------------ */

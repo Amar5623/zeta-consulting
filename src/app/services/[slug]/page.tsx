@@ -14,6 +14,7 @@ import { WorkCard } from "@/components/ui/work-card";
 import { PageTransition } from "@/components/layout/page-transition";
 import { PageHero, PageHeroFallback } from "@/components/sections/page-hero";
 import { Faq } from "@/components/sections/faq";
+import { ServiceSections } from "@/components/sections/service-sections";
 import { MaskLines } from "@/components/motion/mask-lines";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 
@@ -75,7 +76,7 @@ async function ServiceContent({ params }: Pick<PageProps<"/services/[slug]">, "p
           { label: "Services", href: "/services" },
           { label: s.title, href: `/services/${s.slug}` },
         ]}
-        title={[s.title]}
+        title={[s.headline ?? s.title]}
         description={s.summary}
       >
         <div className="flex flex-wrap gap-3">
@@ -128,6 +129,8 @@ async function ServiceContent({ params }: Pick<PageProps<"/services/[slug]">, "p
         </div>
       </section>
 
+      {s.sections && <ServiceSections sections={s.sections} />}
+
       {/* Deliverables + stack */}
       <section className="py-20 sm:py-28">
         <Container className="grid gap-14 lg:grid-cols-2 lg:gap-20">
@@ -164,8 +167,8 @@ async function ServiceContent({ params }: Pick<PageProps<"/services/[slug]">, "p
         <section className="pb-20 sm:pb-28">
           <Container className="flex flex-col gap-14">
             <SectionHeader
-              eyebrow="Related work"
-              title={["Recent work in", <span key="2" className="accent-serif">{s.title}.</span>]}
+              eyebrow="Related case studies"
+              title={["Where this", <span key="2" className="accent-serif">shows up in practice.</span>]}
               action={
                 <Button href="/work" variant="secondary" size="md" arrow>
                   All work

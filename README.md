@@ -18,8 +18,9 @@ All copy and data live in **`src/content/`**. Components read from these files, 
 | File | What it holds |
 | --- | --- |
 | `site.ts` | Company name, domain, email, phone, WhatsApp, booking link, address, socials, showreel |
-| `services.ts` | The 8 services: copy, capabilities, deliverables, stack, FAQs |
-| `work.ts` | Case studies (**placeholders**). Add `cover` / `gallery` image paths, set `placeholder: false` when real |
+| `services.ts` | The 10 services: copy, capabilities, deliverables, stack, FAQs, plus optional long-form `sections` (phases, offerings, principles, KPI tables, engagement models) |
+| `industries.ts` | The 12 industries: headline, pain points, offerings, related services, featured case study, and the spec for each designed interface visual. Also the cross-industry delivery framework |
+| `work.ts` | The 12 case studies. Each has a `status` (`blueprint`, `discovery`, `reference`) that is shown on the site. Add `cover` / `gallery` paths once real screenshots are approved |
 | `people.ts` | Testimonials, team, client logos (**placeholders**) |
 | `insights.ts` | Blog posts (**placeholders**) |
 | `company.ts` | Process steps, values, commitments, engagement models, tech stack marquee, general FAQs |
@@ -46,9 +47,18 @@ Every image slot renders a designed placeholder until a `src` is provided.
 `design.md` specifies **PP Neue Montreal** + **Ivyora Display** (commercial). The site ships with free stand-ins
 (Hanken Grotesk + Instrument Serif). Swap instructions are in `src/app/fonts.ts`.
 
-### Logo
+### Logo & brand
 
-`src/components/ui/logo.tsx` and `src/app/icon.svg` contain a placeholder mark. Replace both with the final logo.
+The official faceted "Z" mark is vectorised in `src/components/ui/zeta-mark.ts` and used by the header/footer lockup
+(`src/components/ui/logo.tsx`), the favicon (`src/app/icon.svg`), the Apple touch icon and the social share image.
+Standalone SVGs are in `public/brand/`. The wordmark is set in Montserrat, matching the logo system.
+If the designer supplies an original vector file, replace the path in `zeta-mark.ts` with it.
+
+### Case study and industry visuals
+
+Until real screenshots exist, each industry and case study shows a designed, illustrative interface scene
+(`src/components/visuals/industry-visual.tsx`, configured per industry in `industries.ts`). Set `cover` on a case study
+to replace it with a real image.
 
 ## Structure
 

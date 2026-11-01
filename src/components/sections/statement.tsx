@@ -22,7 +22,7 @@ export function Statement() {
           </div>
           <ScrollHighlight
             className="text-h3 lg:col-span-9 lg:text-[2.75rem] lg:leading-[1.15] lg:tracking-[-0.03em]"
-            text="Zeta is a senior team of engineers, designers and growth strategists. We turn ideas into *working* *software,* put AI to work where it *pays* *off,* and make sure customers can *find* *you* on Google and in AI answers."
+            text="We bring business strategy, software engineering, system integration and intelligent automation together. We extend what *already* *works,* add intelligence where it delivers *measurable* *value,* and make sure customers can *find* *you* on Google and in AI answers."
           />
         </div>
 

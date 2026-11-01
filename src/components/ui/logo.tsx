@@ -1,28 +1,29 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { ZETA_MARK_PATH, ZETA_MARK_VIEWBOX } from "./zeta-mark";
 
-/** Placeholder mark — swap the SVG for your final logo. */
-export function LogoMark({ className }: { className?: string }) {
+/** The faceted Zeta "Z" mark. Inherits the current text colour. */
+export function LogoMark({ className, title }: { className?: string; title?: string }) {
   return (
-    <svg viewBox="0 0 32 32" aria-hidden className={cn("size-8", className)}>
-      <rect width="32" height="32" rx="9" fill="currentColor" />
-      <path d="M10 10.5h12L10 21.5h12" fill="none" stroke="var(--logo-ink, #fff)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="24.5" cy="7.5" r="2.5" fill="#f55c1a" />
+    <svg viewBox={ZETA_MARK_VIEWBOX} className={cn("size-9", className)} role={title ? "img" : undefined} aria-hidden={title ? undefined : true}>
+      {title && <title>{title}</title>}
+      <path fill="currentColor" fillRule="evenodd" d={ZETA_MARK_PATH} />
     </svg>
   );
 }
 
+/** Primary horizontal lockup: mark + stacked "ZETA / Consulting" wordmark, per the logo system. */
 export function Logo({ className, tone = "dark" }: { className?: string; tone?: "dark" | "light" }) {
   return (
     <Link
       href="/"
       aria-label="Zeta Consulting — home"
-      className={cn("group inline-flex items-center gap-2.5", tone === "light" ? "text-white [--logo-ink:#010101]" : "text-ink", className)}
+      className={cn("group inline-flex items-center gap-2.5", tone === "light" ? "text-white" : "text-ink", className)}
     >
-      <LogoMark className="transition-transform duration-700 ease-out-expo group-hover:-rotate-6" />
-      <span className="flex items-baseline gap-1.5 text-[1.1875rem] leading-none tracking-[-0.03em]">
-        <span className="font-semibold">Zeta</span>
-        <span className={cn("font-normal", tone === "light" ? "text-white/55" : "text-fg-muted")}>Consulting</span>
+      <LogoMark className="size-[2.375rem] transition-transform duration-700 ease-out-expo group-hover:-rotate-6" />
+      <span className="flex flex-col font-brand leading-none">
+        <span className="text-[1.3125rem] font-bold tracking-[0.04em]">ZETA</span>
+        <span className="mt-[3px] text-[0.75rem] font-normal tracking-[0.07em]">Consulting</span>
       </span>
     </Link>
   );

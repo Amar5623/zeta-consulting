@@ -38,8 +38,8 @@ export function Hero() {
 
             <Reveal delay={0.45} className="mt-8 max-w-2xl">
               <p className="text-lead text-fg-muted">
-                Zeta Consulting is a full-service technology partner. Strategy, design, engineering, AI and SEO from one senior team, shipping in
-                weeks, not quarters.
+                Build smarter systems. Connect what you already use. Zeta designs, builds, integrates and modernizes the platforms your business
+                depends on, and measures what changes.
               </p>
             </Reveal>
 

@@ -1,31 +1,35 @@
 import type { Metadata } from "next";
+import { caseStudies } from "@/content/work";
+import { industries } from "@/content/industries";
 import { PageTransition } from "@/components/layout/page-transition";
 import { Container } from "@/components/ui/primitives";
+import { WorkCard } from "@/components/ui/work-card";
 import { PageHero } from "@/components/sections/page-hero";
 import { WorkGrid } from "@/components/sections/work-grid";
-import { Testimonials } from "@/components/sections/testimonials";
 
 export const metadata: Metadata = {
   title: "Work & Case Studies",
-  description: "Selected projects across AI agents, web platforms, mobile apps, digital transformation, SEO and GEO.",
+  description:
+    "Case studies and solution blueprints across marketplaces, EV, logistics, maritime, real estate, industrial IoT, finance, talent, education, hospitality, healthcare and SaaS.",
   alternates: { canonical: "/work" },
 };
 
 export default function WorkPage() {
+  const entries = caseStudies.map((c) => ({ slug: c.slug, industry: c.industry, card: <WorkCard item={c} /> }));
+  const filters = industries.filter((i) => caseStudies.some((c) => c.industry === i.slug)).map((i) => ({ slug: i.slug, label: i.short }));
+
   return (
     <PageTransition>
       <PageHero
         eyebrow="Work"
-        title={["Selected work,", <span key="2" className="accent-serif">real outcomes.</span>]}
-        description="A look at what we've designed, built and grown with our clients. Each case study covers the challenge, our approach and the measurable result."
+        title={["Twelve industries.", <span key="2" className="accent-serif">One way of working.</span>]}
+        description="Case studies, discovery-stage engagements and solution blueprints, each labelled for exactly what it is. Every one starts with a real operational problem and ends with how success gets measured."
       />
       <section className="py-20 sm:py-28">
         <Container>
-          <WorkGrid />
+          <WorkGrid entries={entries} filters={filters} />
         </Container>
       </section>
-      <Testimonials />
-      <div className="h-20 sm:h-28" />
     </PageTransition>
   );
 }

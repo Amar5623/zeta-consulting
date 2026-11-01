@@ -12,6 +12,7 @@ import { FooterWordmark, BackToTop, Year } from "./footer-client";
 
 const company = [
   { label: "About", href: "/about" },
+  { label: "Industries", href: "/industries" },
   { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
   { label: "Insights", href: "/insights" },
