@@ -1,6 +1,6 @@
 # Zeta Consulting — website
 
-Marketing site for Zeta Consulting: AI agents & solutions, web and mobile, digital transformation, SEO and GEO/AEO.
+Marketing site for Zeta Consulting: AI agents & solutions, web and mobile, digital transformation, SEO and GEO/AEO and other IT services.
 
 **Stack:** Next.js 16 (App Router, Cache Components, static prerendering) · React 19 · TypeScript · Tailwind CSS v4 · Motion · Lenis smooth scroll · lucide icons.
 
