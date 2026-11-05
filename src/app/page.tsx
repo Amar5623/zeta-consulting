@@ -1,10 +1,13 @@
 import { getCaseStudy, type CaseStudy } from "@/content/work";
 import { getIndustry } from "@/content/industries";
 import { faqs } from "@/content/company";
+import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/primitives";
 import { SectionHeader } from "@/components/ui/section-header";
 import { PageTransition } from "@/components/layout/page-transition";
+import { FaqSection } from "@/components/seo/FaqSection";
 import { Hero } from "@/components/sections/hero";
 import { StackMarquee } from "@/components/sections/stack-marquee";
 import { Statement } from "@/components/sections/statement";
@@ -15,9 +18,15 @@ import { Values } from "@/components/sections/values";
 import { TeamCta } from "@/components/sections/team-cta";
 import { Engagements } from "@/components/sections/engagements";
 import { InsightsPreview } from "@/components/sections/insights-preview";
-import { Faq } from "@/components/sections/faq";
 import { IndustriesGrid } from "@/components/sections/industries-grid";
 import { CaseVisual } from "@/components/visuals/case-visual";
+
+export const metadata = pageMetadata({
+  title: `${site.name} | AI Agents, Software & Digital Transformation`,
+  description: site.description,
+  path: "/",
+  absoluteTitle: true,
+});
 
 const featured = ["fleet-visibility-trailer-security", "machine-vision-industrial-telemetry", "offline-first-vessel-operations", "enterprise-ai-usage-metering"]
   .map((slug) => getCaseStudy(slug))
@@ -89,7 +98,7 @@ export default function HomePage() {
       <TeamCta />
       <Engagements />
       <InsightsPreview />
-      <Faq items={faqs} />
+      <FaqSection items={faqs} />
     </PageTransition>
   );
 }

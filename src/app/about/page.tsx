@@ -1,8 +1,7 @@
-import type { Metadata } from "next";
-import { MapPin } from "lucide-react";
-import { site } from "@/content/site";
-import { team, clients } from "@/content/people";
-import { Media } from "@/components/ui/media";
+import { CalendarCheck, FileText, Globe2, KeyRound, LineChart, MessagesSquare, ShieldCheck, Timer, UserCheck, Workflow, Wrench, Zap } from "lucide-react";
+import { pageMetadata } from "@/lib/seo";
+import { breadcrumbGraph } from "@/lib/schema";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Container, Eyebrow } from "@/components/ui/primitives";
 import { SectionHeader } from "@/components/ui/section-header";
 import { PageTransition } from "@/components/layout/page-transition";
@@ -10,32 +9,75 @@ import { PageHero } from "@/components/sections/page-hero";
 import { Values } from "@/components/sections/values";
 import { DeliveryFramework } from "@/components/sections/delivery-framework";
 import { Statement } from "@/components/sections/statement";
-import { Parallax } from "@/components/motion/parallax";
+import { TeamCta } from "@/components/sections/team-cta";
+import { MaskLines } from "@/components/motion/mask-lines";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: `${site.name} is a senior team of engineers, designers, AI specialists and growth strategists building software that moves businesses forward.`,
-  alternates: { canonical: "/about" },
-};
+export const metadata = pageMetadata({
+  title: "About Zeta: A Remote-First Senior Engineering Team",
+  description:
+    "Zeta Consulting is a remote-first team of senior engineers who design, build and integrate AI agents, platforms and digital transformation programs, measured against your baseline.",
+  path: "/about",
+});
+
+const operatingModel = [
+  {
+    icon: Globe2,
+    title: "Remote by design, not by default",
+    body: "Our engineers work from where they do their best work. Every engagement agrees fixed overlap hours with your team, so decisions never wait a day.",
+  },
+  {
+    icon: UserCheck,
+    title: "Senior people on every project",
+    body: "The engineers you meet in scoping are the engineers who build. There is no hand-off to a junior bench after the contract is signed.",
+  },
+  {
+    icon: KeyRound,
+    title: "One accountable lead",
+    body: "A single technical lead owns scope, quality and communication. You always know who to ask, and they always know the answer.",
+  },
+  {
+    icon: MessagesSquare,
+    title: "Async-first communication",
+    body: "Written updates, recorded walkthroughs and a shared tracker replace status meetings. Meetings are kept for decisions.",
+  },
+  {
+    icon: CalendarCheck,
+    title: "A working demo every week",
+    body: "Progress is shown in running software, not slides. You can test, comment and redirect while change is still cheap.",
+  },
+  {
+    icon: FileText,
+    title: "Documentation is a deliverable",
+    body: "Architecture notes, runbooks and decision records ship with the code, so your team can own and extend what we build.",
+  },
+];
+
+const cadence = [
+  { day: "Monday", title: "Plan", body: "Priorities confirmed against the agreed outcome. Risks and open questions logged where you can see them." },
+  { day: "Mid-week", title: "Build & update", body: "Short written updates with links to working builds, plus answers to anything raised the day before." },
+  { day: "Friday", title: "Demo & decide", body: "A live demo of what shipped, measured against acceptance criteria, and a clear call on what comes next." },
+  { day: "Monthly", title: "Review outcomes", body: "Progress compared with the baseline: what improved, what didn't, and what we recommend changing." },
+];
+
+const value = [
+  { icon: Timer, title: "Less time lost to manual work", body: "We automate the repeatable steps and route exceptions to the right person, so teams spend time on judgment, not copy-paste." },
+  { icon: Workflow, title: "Systems that finally talk to each other", body: "We connect ERP, CRM, finance and operational tools through clean integrations instead of spreadsheets and re-keying." },
+  { icon: LineChart, title: "Decisions on live data", body: "Dashboards and alerts built on the data you already have, so leaders see what is happening now, not last month." },
+  { icon: Zap, title: "Faster, more reliable products", body: "Web and mobile platforms engineered for speed, accessibility and uptime, which customers notice and search engines reward." },
+  { icon: ShieldCheck, title: "Lower delivery risk", body: "Discovery, prototypes and pilots validate the idea before large spend, and every claim is checked against a baseline." },
+  { icon: Wrench, title: "Technology you can own", body: "You keep 100% of the code and IP, with documentation and handover that make you independent of us." },
+];
 
 export default function AboutPage() {
-  const { address } = site;
   return (
     <PageTransition>
+      <JsonLd data={breadcrumbGraph([{ name: "About", path: "/about" }])} />
       <PageHero
         eyebrow="About Zeta"
-        title={["Build smarter systems.", <span key="2" className="accent-serif">Connect what you already use.</span>]}
-        description="Zeta Consulting partners with businesses to design, build, integrate and modernize the digital systems they depend on — solving real operational problems without automatically replacing the technology they already have."
+        title={["Senior engineers, working remotely,", <span key="2" className="accent-serif">measured on outcomes.</span>]}
+        description="Zeta Consulting partners with businesses to design, build, integrate and modernize the digital systems they depend on, solving real operational problems without automatically replacing the technology they already have."
       />
-
-      <section className="px-2 pt-2 sm:px-3 sm:pt-3">
-        <div className="overflow-hidden rounded-xl">
-          <Parallax offset={50} className="h-[50svh] min-h-[320px] sm:h-[70svh]">
-            <Media alt="The Zeta Consulting team at work" label="Team / office photo (2400×1400)" tint="#E9E6E0" className="-my-[50px] h-[calc(100%+100px)] w-full" />
-          </Parallax>
-        </div>
-      </section>
 
       {/* Story */}
       <section className="py-20 sm:py-28">
@@ -45,21 +87,30 @@ export default function AboutPage() {
           </Reveal>
           <div className="flex flex-col gap-8 lg:col-span-8">
             <Reveal>
-              <p className="text-h3 font-normal leading-snug">
-                Technology that moves your business forward. We bring business strategy, software engineering, system integration and
-                intelligent automation together to <span className="accent-serif">solve complex operational challenges.</span>
-              </p>
+              <h2 className="text-h3 font-normal leading-snug">
+                Projects rarely fail because of the technology. They fail because nobody connects the software to{" "}
+                <span className="accent-serif">the way the business actually runs.</span>
+              </h2>
             </Reveal>
             <Reveal delay={0.1} className="grid gap-6 text-fg-muted sm:grid-cols-2">
               <p>
-                We work with businesses across e-commerce, mobility, logistics, maritime, real estate, manufacturing, financial services,
-                education, healthcare, hospitality and enterprise software — designing custom web and mobile applications, scalable SaaS
-                products, AI-enabled workflows, industrial IoT solutions and integrations that connect existing systems.
+                Zeta was founded by engineers who had spent years inside other companies&apos; technology projects and kept seeing the same
+                pattern. New platforms were bought to replace systems that only needed extending. AI pilots launched without a baseline, so
+                nobody could say whether they worked. Polished builds were handed to teams who could not maintain them.
               </p>
               <p>
-                We believe transformation should build on what already works. Rather than replacing established systems by default, we
-                extend their capabilities, improve workflows and introduce intelligence where it delivers measurable value — from
-                discovery and architecture through development, integration, deployment and optimization.
+                We built Zeta to work the other way round. We start with the operational problem — the bottleneck, the manual hours, the data
+                nobody trusts — and only then choose the technology. We extend what already works, add intelligence where it delivers
+                measurable value, and measure the result against where you started.
+              </p>
+              <p>
+                We chose to be remote-first from day one. It lets us bring together specialists in AI, integration, product engineering and
+                search who would never fit in one office, and it builds the habits that make projects predictable: clear writing, visible
+                progress and decisions that are recorded, not remembered.
+              </p>
+              <p>
+                Today we work with startups, growing SaaS companies and established operators across twelve industries — from marketplaces and
+                maritime fleets to factory floors, clinics and finance teams.
               </p>
             </Reveal>
             <Reveal delay={0.15}>
@@ -72,26 +123,25 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <Statement />
-      <Values />
-
-      {/* Team */}
-      <section className="py-20 sm:py-28">
-        <Container className="flex flex-col gap-14">
+      {/* How our team works */}
+      <section className="pb-20 sm:pb-28">
+        <Container className="flex flex-col gap-14 sm:gap-20">
           <SectionHeader
-            eyebrow="Team"
-            title={["The people", <span key="2" className="accent-serif">behind the work.</span>]}
-            description="Senior specialists across engineering, design, AI and growth. Add real names, roles and photos in src/content/people.ts."
+            eyebrow="How our team works"
+            title={["A distributed team that", <span key="2" className="accent-serif">executes like it sits next to you.</span>]}
+            description="Hyper-skilled specialists across AI, integration, product engineering and growth, organised around one accountable lead per engagement."
           />
-          <Stagger className="grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-3">
-            {team.map((m, i) => (
-              <StaggerItem key={`${m.name}-${i}`} className="group flex flex-col gap-4">
-                <div className="overflow-hidden rounded-lg">
-                  <Media src={m.photo} alt={`${m.name}, ${m.role}`} label="Portrait 4:5" className="aspect-[4/5] w-full transition-transform duration-[1.2s] ease-out-expo group-hover:scale-[1.03]" sizes="(min-width: 768px) 33vw, 50vw" />
-                </div>
-                <div>
-                  <p className="text-h4">{m.name}</p>
-                  <p className="text-[0.875rem] text-fg-muted">{m.role}</p>
+          <Stagger className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {operatingModel.map((m) => (
+              <StaggerItem key={m.title}>
+                <div className="group flex h-full flex-col gap-10 rounded-lg border border-line bg-white p-7 transition-[box-shadow,transform,border-color] duration-500 ease-out-expo hover:-translate-y-1 hover:border-muted hover:shadow-card sm:p-8">
+                  <span className="grid size-11 place-items-center rounded-full bg-canvas transition-colors duration-500 group-hover:bg-ink group-hover:text-white">
+                    <m.icon className="size-5" strokeWidth={1.6} />
+                  </span>
+                  <div className="flex flex-col gap-2.5">
+                    <h3 className="text-h4">{m.title}</h3>
+                    <p className="text-fg-muted">{m.body}</p>
+                  </div>
                 </div>
               </StaggerItem>
             ))}
@@ -99,65 +149,63 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* Clients */}
-      <section className="pb-20 sm:pb-28">
-        <Container className="flex flex-col gap-10">
-          <Reveal>
-            <Eyebrow>Clients & partners</Eyebrow>
-          </Reveal>
-          <Stagger className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-4">
-            {clients.map((c) => (
-              <div key={c.name} className="grid aspect-[3/2] place-items-center bg-white p-6">
-                <StaggerItem>
-                  {c.logo ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={c.logo} alt={c.name} className="max-h-10 w-auto opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0" />
-                  ) : (
-                    <span className="text-[1.0625rem] font-medium tracking-tight text-fg-subtle">{c.name}</span>
-                  )}
-                </StaggerItem>
+      {/* Weekly rhythm */}
+      <section className="px-2 sm:px-3">
+        <div className="rounded-xl bg-night py-20 text-white sm:py-28">
+          <Container className="flex flex-col gap-14">
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+              <div className="flex flex-col gap-5">
+                <Eyebrow tone="light">The weekly rhythm</Eyebrow>
+                <MaskLines lines={["Predictable by design,", <span key="2" className="accent-serif">wherever we are.</span>]} className="text-h2" />
               </div>
+              <p className="max-w-md text-night-muted">The same cadence on every engagement, so you always know what shipped, what is next and what it costs.</p>
+            </div>
+            <Stagger className="grid gap-px overflow-hidden rounded-xl border border-night-line bg-night-line sm:grid-cols-2 lg:grid-cols-4">
+              {cadence.map((c) => (
+                <div key={c.day} className="bg-night p-7 sm:p-8">
+                  <StaggerItem className="flex flex-col gap-3">
+                    <span className="text-[0.8125rem] text-night-muted">{c.day}</span>
+                    <h3 className="text-h4">{c.title}</h3>
+                    <p className="text-night-muted">{c.body}</p>
+                  </StaggerItem>
+                </div>
+              ))}
+            </Stagger>
+          </Container>
+        </div>
+      </section>
+
+      <Statement />
+
+      {/* Business value */}
+      <section className="pb-20 sm:pb-28">
+        <Container className="flex flex-col gap-14 sm:gap-20">
+          <SectionHeader
+            eyebrow="Business value"
+            title={["What changes when", <span key="2" className="accent-serif">the work is done.</span>]}
+            description="We agree the baseline, the target and the measurement method before we build, so value is something we can show, not something we claim."
+          />
+          <Stagger className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {value.map((v) => (
+              <StaggerItem key={v.title}>
+                <div className="flex h-full flex-col gap-10 rounded-lg border border-line bg-white p-7 sm:p-8">
+                  <span className="grid size-11 place-items-center rounded-full bg-canvas">
+                    <v.icon className="size-5" strokeWidth={1.6} />
+                  </span>
+                  <div className="flex flex-col gap-2.5">
+                    <h3 className="text-h4">{v.title}</h3>
+                    <p className="text-fg-muted">{v.body}</p>
+                  </div>
+                </div>
+              </StaggerItem>
             ))}
           </Stagger>
         </Container>
       </section>
 
       <DeliveryFramework />
-
-      {/* Office */}
-      <section className="py-20 sm:py-28">
-        <Container className="grid gap-10 lg:grid-cols-2">
-          <Reveal className="flex flex-col justify-between gap-10 rounded-xl bg-canvas p-8 sm:p-12">
-            <div className="flex flex-col gap-5">
-              <Eyebrow>Visit us</Eyebrow>
-              <h2 className="text-h2">
-                Our <span className="accent-serif">office.</span>
-              </h2>
-            </div>
-            <div className="flex flex-col gap-6">
-              <address className="flex gap-3 text-lead not-italic">
-                <MapPin className="mt-1.5 size-5 shrink-0" strokeWidth={1.5} />
-                <span>
-                  {address.street}
-                  <br />
-                  {address.locality}, {address.region} {address.postalCode}
-                  <br />
-                  {address.country}
-                </span>
-              </address>
-              <p className="text-fg-muted">{site.hours}</p>
-              {address.mapUrl && (
-                <a href={address.mapUrl} target="_blank" rel="noopener noreferrer" className="link-underline w-fit">
-                  Open in Google Maps
-                </a>
-              )}
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Media alt="Zeta Consulting office" label="Office photo or map embed" tint="#E3E7EC" className="aspect-[4/3] h-full w-full rounded-xl" />
-          </Reveal>
-        </Container>
-      </section>
+      <Values />
+      <TeamCta />
     </PageTransition>
   );
 }

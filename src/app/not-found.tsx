@@ -5,7 +5,7 @@ import { Reveal } from "@/components/motion/reveal";
 
 export default function NotFound() {
   return (
-    <main id="main" className="px-2 pt-2 sm:px-3 sm:pt-3">
+    <main id="main" tabIndex={-1} className="px-2 pt-2 outline-none sm:px-3 sm:pt-3">
       <div className="relative overflow-hidden rounded-xl bg-canvas py-40 sm:py-56">
         <div aria-hidden className="absolute inset-0 bg-dots [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
         <Container className="relative flex flex-col items-center gap-8 text-center">

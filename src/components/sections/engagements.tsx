@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { engagements } from "@/content/company";
-import { bookingHref } from "@/content/site";
+import { contactHref } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/primitives";
@@ -14,7 +14,7 @@ export function Engagements() {
         <SectionHeader
           eyebrow="Ways to work together"
           title={["Simple engagements.", <span key="2" className="accent-serif">No surprises.</span>]}
-          description="Pick the model that fits your stage. Every engagement starts with a free intro call and a written scope."
+          description="Pick the model that fits your stage. Every engagement starts with a free scoping conversation and a written scope."
         />
         <Stagger className="grid gap-3 lg:grid-cols-3">
           {engagements.map((e) => (
@@ -46,7 +46,7 @@ export function Engagements() {
                     </li>
                   ))}
                 </ul>
-                <Button href={bookingHref()} variant={e.featured ? "light" : "secondary"} arrow className="w-full justify-between">
+                <Button href={contactHref} variant={e.featured ? "light" : "secondary"} arrow className="w-full justify-between">
                   Get a quote
                 </Button>
               </div>

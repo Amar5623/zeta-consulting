@@ -6,6 +6,7 @@ import { Eyebrow } from "./primitives";
 
 /** Eyebrow + masked headline + optional description and action, used to open most sections. */
 export function SectionHeader({
+  id,
   eyebrow,
   title,
   description,
@@ -15,6 +16,8 @@ export function SectionHeader({
   as = "h2",
   className,
 }: {
+  /** Optional heading id, for a parent section's aria-labelledby. */
+  id?: string;
   eyebrow?: string;
   title: ReactNode[];
   description?: ReactNode;
@@ -40,7 +43,7 @@ export function SectionHeader({
             <Eyebrow tone={tone}>{eyebrow}</Eyebrow>
           </Reveal>
         )}
-        <MaskLines as={as} lines={title} className={cn(as === "h1" ? "text-h1" : "text-h2", tone === "light" && "text-white")} />
+        <MaskLines id={id} as={as} lines={title} className={cn(as === "h1" ? "text-h1" : "text-h2", tone === "light" && "text-white")} />
       </div>
       {(description || action) && (
         <Reveal delay={0.15} className={cn("flex max-w-md flex-col items-start gap-6", centered && "items-center", align === "split" && "lg:pb-2")}>

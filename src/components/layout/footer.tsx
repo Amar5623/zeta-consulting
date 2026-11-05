@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { bookingHref, site } from "@/content/site";
+import { contactHref, mailtoHref, site, telHref } from "@/content/site";
 import { services } from "@/content/services";
 import { Logo } from "@/components/ui/logo";
 import { Button } from "@/components/ui/button";
@@ -20,7 +20,6 @@ const company = [
 ];
 
 export function Footer() {
-  const { address } = site;
   return (
     <footer className="relative overflow-hidden bg-night text-white">
       <Container className="pt-24 sm:pt-32">
@@ -38,11 +37,11 @@ export function Footer() {
           </div>
           <Reveal delay={0.15} className="flex flex-col gap-6 lg:items-end">
             <Magnetic>
-              <Button href={bookingHref()} variant="light" arrow>
-                Book a free 30-min call
+              <Button href={contactHref} variant="light" arrow>
+                Start a project
               </Button>
             </Magnetic>
-            <a href={`mailto:${site.email}`} className="group inline-flex items-center gap-2 text-h4 text-white/80 hover:text-white">
+            <a href={mailtoHref} className="group inline-flex items-center gap-2 text-h4 text-white/80 hover:text-white">
               <span className="link-underline">{site.email}</span>
               <ArrowUpRight className="size-5 transition-transform duration-500 ease-out-expo group-hover:rotate-45" strokeWidth={1.5} />
             </a>
@@ -72,30 +71,16 @@ export function Footer() {
             ))}
           </FooterColumn>
 
-          <div className="flex flex-col gap-8 lg:col-span-3">
-            <FooterColumn title="Office">
-              <address className="not-italic leading-relaxed text-white/80">
-                {address.street}
-                <br />
-                {address.locality}, {address.region} {address.postalCode}
-                <br />
-                {address.country}
-              </address>
-              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="text-white/80 hover:text-white">
-                {site.phone}
-              </a>
-              <p className="text-night-muted">{site.hours}</p>
-            </FooterColumn>
-            <FooterColumn title="Follow">
-              <div className="flex flex-wrap gap-x-5 gap-y-2">
-                {site.socials.map((s) => (
-                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-1 text-white/80 hover:text-white">
-                    <span className="link-underline">{s.label}</span>
-                  </a>
-                ))}
-              </div>
-            </FooterColumn>
-          </div>
+          <FooterColumn title="Contact" className="lg:col-span-3">
+            <a href={mailtoHref} className="group w-fit text-white/80 hover:text-white">
+              <span className="link-underline">{site.email}</span>
+            </a>
+            <a href={telHref} className="group w-fit text-white/80 hover:text-white">
+              <span className="link-underline">{site.phoneDisplay}</span>
+            </a>
+            <p className="text-night-muted">{site.workingModel}</p>
+            <p className="text-night-muted">{site.responseTime}</p>
+          </FooterColumn>
         </div>
       </Container>
 

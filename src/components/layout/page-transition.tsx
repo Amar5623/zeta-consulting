@@ -7,7 +7,9 @@ import { ViewTransition, type ReactNode } from "react";
 export function PageTransition({ children }: { children: ReactNode }) {
   return (
     <ViewTransition enter="page" exit="page" default="none">
-      <main id="main">{children}</main>
+      <main id="main" tabIndex={-1} className="outline-none">
+        {children}
+      </main>
     </ViewTransition>
   );
 }

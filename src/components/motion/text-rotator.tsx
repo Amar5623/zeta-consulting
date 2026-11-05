@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { easeOutExpo } from "./ease";
 
 /** Cycles through words in place. All words share one grid cell so the width never jumps. */
-export function TextRotator({ words, interval = 2600, className }: { words: string[]; interval?: number; className?: string }) {
+export function TextRotator({ words, colors, interval = 2600, className }: { words: string[]; colors?: string[]; interval?: number; className?: string }) {
   const [index, setIndex] = useState(0);
   const reduce = useReducedMotion();
 
@@ -27,6 +27,7 @@ export function TextRotator({ words, interval = 2600, className }: { words: stri
         <motion.span
           key={words[index]}
           className="col-start-1 row-start-1 whitespace-nowrap"
+          style={colors ? { color: colors[index % colors.length] } : undefined}
           initial={{ y: "100%", opacity: 0 }}
           animate={{ y: "0%", opacity: 1 }}
           exit={{ y: "-100%", opacity: 0 }}

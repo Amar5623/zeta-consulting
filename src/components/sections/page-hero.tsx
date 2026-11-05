@@ -1,14 +1,14 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
-import { absoluteUrl, cn, jsonLd } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { Container, Eyebrow } from "@/components/ui/primitives";
 import { MaskLines } from "@/components/motion/mask-lines";
 import { Reveal } from "@/components/motion/reveal";
 
 type Crumb = { label: string; href: string };
 
-/** Framed canvas hero used at the top of every inner page. Emits BreadcrumbList JSON-LD. */
+/** Framed canvas hero used at the top of every inner page. Breadcrumb JSON-LD comes from each route's schema graph. */
 export function PageHero({
   eyebrow,
   title,
@@ -25,15 +25,9 @@ export function PageHero({
   className?: string;
 }) {
   const trail = [{ label: "Home", href: "/" }, ...crumbs];
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: trail.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.label, item: absoluteUrl(c.href) })),
-  };
 
   return (
     <section className="px-2 pt-2 sm:px-3 sm:pt-3">
-      {crumbs.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumbSchema)} />}
       <div className={cn("relative overflow-hidden rounded-xl bg-canvas pb-16 pt-36 sm:pb-24 sm:pt-44", className)}>
         <div aria-hidden className="absolute inset-0 bg-dots [mask-image:radial-gradient(ellipse_60%_70%_at_80%_0%,black,transparent)]" />
         <Container className="relative flex flex-col gap-8">
@@ -65,7 +59,7 @@ export function PageHero({
               </Reveal>
             )
           )}
-          <MaskLines as="h1" trigger="mount" delay={0.1} lines={title} className="max-w-5xl text-h1" />
+          <MaskLines id="page-title" as="h1" trigger="mount" delay={0.1} lines={title} className="max-w-5xl text-h1" />
           {description && (
             <Reveal delay={0.3} className="max-w-2xl">
               <p className="text-lead text-fg-muted">{description}</p>

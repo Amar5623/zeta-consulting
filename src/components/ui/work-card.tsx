@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { CaseVisual } from "@/components/visuals/case-visual";
 import { StatusChip } from "./status-chip";
 
-export function WorkCard({ item, className }: { item: CaseStudy; className?: string }) {
+export function WorkCard({ item, className, as: Heading = "h3" }: { item: CaseStudy; className?: string; as?: "h2" | "h3" }) {
   const industry = getIndustry(item.industry);
   return (
     <Link href={`/work/${item.slug}`} className={cn("group flex flex-col gap-5", className)}>
@@ -23,7 +23,7 @@ export function WorkCard({ item, className }: { item: CaseStudy; className?: str
       </div>
       <div className="flex flex-col gap-3">
         <StatusChip status={item.status} className="w-fit" />
-        <h3 className="text-h4">{item.title}</h3>
+        <Heading className="text-h4">{item.title}</Heading>
         <p className="line-clamp-2 text-[0.9375rem] text-fg-muted">{item.summary}</p>
       </div>
     </Link>

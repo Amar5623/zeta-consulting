@@ -6,8 +6,10 @@ import { ArrowUpRight, Check, Info } from "lucide-react";
 import { caseStudies, getCaseStudy, statusMeta } from "@/content/work";
 import { getIndustry } from "@/content/industries";
 import { getService } from "@/content/services";
-import { bookingHref, site } from "@/content/site";
-import { absoluteUrl, jsonLd } from "@/lib/utils";
+import { contactHref } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
+import { caseStudyGraph } from "@/lib/schema";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/button";
 import { Media } from "@/components/ui/media";
 import { Container, Eyebrow } from "@/components/ui/primitives";
@@ -26,11 +28,7 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
   const { slug } = await params;
   const c = getCaseStudy(slug);
   if (!c) return {};
-  return {
-    title: `${c.title} — Case Study`,
-    description: c.summary,
-    alternates: { canonical: `/work/${c.slug}` },
-  };
+  return pageMetadata({ title: `${c.title} Case Study`, description: c.summary, path: `/work/${c.slug}`, ownImage: true });
 }
 
 export default function CaseStudyPage({ params }: PageProps<"/work/[slug]">) {
@@ -53,20 +51,9 @@ async function CaseStudyContent({ params }: Pick<PageProps<"/work/[slug]">, "par
   const next = caseStudies[(index + 1) % caseStudies.length];
   const services = c.services.map((s) => getService(s)).filter((s) => s !== undefined);
 
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: c.title,
-    abstract: c.summary,
-    url: absoluteUrl(`/work/${c.slug}`),
-    creator: { "@id": `${site.url}/#organization` },
-    about: industry?.name,
-    genre: statusMeta[c.status].label,
-  };
-
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
+      <JsonLd data={caseStudyGraph({ slug: c.slug, title: c.title, description: c.summary, about: industry?.name, genre: statusMeta[c.status].label })} />
       <PageHero
         crumbs={[
           { label: "Work", href: "/work" },
@@ -198,7 +185,7 @@ async function CaseStudyContent({ params }: Pick<PageProps<"/work/[slug]">, "par
             <div className="grid gap-3 md:grid-cols-2">
               {c.gallery.map((src, i) => (
                 <Reveal key={src} delay={i * 0.1}>
-                  <Media src={src} alt={`${c.title} — image ${i + 1}`} className="aspect-[4/3] w-full rounded-xl" />
+                  <Media src={src} alt={`${c.title}, image ${i + 1}`} className="aspect-[4/3] w-full rounded-xl" />
                 </Reveal>
               ))}
             </div>
@@ -230,7 +217,7 @@ async function CaseStudyContent({ params }: Pick<PageProps<"/work/[slug]">, "par
             </Stagger>
             <div className="flex flex-col gap-4 border-t border-night-line pt-10 sm:flex-row sm:items-center sm:justify-between">
               <p className="max-w-lg text-night-muted">Facing something similar? We start by establishing your baseline and the outcome you need.</p>
-              <Button href={bookingHref()} variant="light" arrow>
+              <Button href={contactHref} variant="light" arrow>
                 Discuss your project
               </Button>
             </div>

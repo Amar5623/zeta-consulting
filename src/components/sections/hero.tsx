@@ -1,4 +1,4 @@
-import { bookingHref } from "@/content/site";
+import { contactHref } from "@/content/site";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/primitives";
 import { MaskLines } from "@/components/motion/mask-lines";
@@ -8,6 +8,8 @@ import { HeroShowcase } from "@/components/visuals/hero-showcase";
 import { CursorField, HeroHighlights } from "./hero-client";
 
 const rotating = ["AI agents", "web platforms", "mobile apps", "digital products", "growth engines"];
+// One bright colour per rotating phrase; the rest of the hero stays black and white.
+const rotatingColors = ["#F55C1A", "#7C3AED", "#0EA5E9", "#10B981", "#E11D48"];
 
 export function Hero() {
   return (
@@ -24,13 +26,14 @@ export function Hero() {
             <h1 className="mt-8 text-display">
               <span className="sr-only">We build AI agents, web platforms, mobile apps and growth engines that move business forward.</span>
               <MaskLines
+                aria-hidden
                 as="span"
                 trigger="mount"
                 delay={0.15}
                 className="block"
                 lines={[
                   "We build",
-                  <TextRotator key="r" words={rotating} className="accent-serif text-[1.08em]" />,
+                  <TextRotator key="r" words={rotating} colors={rotatingColors} className="accent-serif text-[1.08em]" />,
                   "that move business forward.",
                 ]}
               />
@@ -44,8 +47,8 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={0.55} className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
-              <Button href={bookingHref()} arrow>
-                Book a free 30-min call
+              <Button href={contactHref} arrow>
+                Start a project
               </Button>
               <Button href="/work" variant="secondary">
                 See our work

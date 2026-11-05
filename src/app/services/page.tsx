@@ -1,36 +1,39 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { serviceGroups, servicesByGroup } from "@/content/services";
 import { faqs } from "@/content/company";
-import { bookingHref } from "@/content/site";
+import { contactHref } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
+import { breadcrumbGraph } from "@/lib/schema";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/button";
 import { Chip, Container } from "@/components/ui/primitives";
 import { PageTransition } from "@/components/layout/page-transition";
 import { PageHero } from "@/components/sections/page-hero";
 import { Engagements } from "@/components/sections/engagements";
 import { Process } from "@/components/sections/process";
-import { Faq } from "@/components/sections/faq";
+import { FaqSection } from "@/components/seo/FaqSection";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 
-export const metadata: Metadata = {
-  title: "Services — AI, Web, Mobile, Transformation, SEO & GEO",
+export const metadata = pageMetadata({
+  title: "Services: AI Agents, Web & Mobile, Transformation, SEO & GEO",
   description:
-    "AI agents and integrations, web platforms, mobile apps, product design, digital transformation, SEO and GEO/AEO — delivered by one senior team.",
-  alternates: { canonical: "/services" },
-};
+    "AI agents and integrations, app and web strategy, product design, immersive experiences, web platforms, mobile apps, digital transformation, SEO and GEO/AEO, delivered by one senior team.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (
     <PageTransition>
+      <JsonLd data={breadcrumbGraph([{ name: "Services", path: "/services" }])} />
       <PageHero
         eyebrow="Services"
-        title={["Eight ways we help you", <span key="2" className="accent-serif">build, launch and grow.</span>]}
+        title={["Ten ways we help you", <span key="2" className="accent-serif">build, launch and grow.</span>]}
         description="Bring us one problem or the whole roadmap. Every service is run by senior specialists who work as one team, so strategy, design, engineering and growth stay connected."
       >
         <div className="flex flex-wrap gap-3">
-          <Button href={bookingHref()} arrow>
-            Book a free call
+          <Button href={contactHref} arrow>
+            Start a project
           </Button>
           <Button href="/work" variant="secondary">
             See our work
@@ -41,7 +44,7 @@ export default function ServicesPage() {
       <section className="py-20 sm:py-28">
         <Container className="flex flex-col gap-24">
           {serviceGroups.map((group, gi) => (
-            <div key={group.id} className="grid gap-10 border-t border-line pt-10 lg:grid-cols-12">
+            <div key={group.id} className="grid grid-cols-[minmax(0,1fr)] gap-10 border-t border-line pt-10 lg:grid-cols-12">
               <div className="lg:col-span-4">
                 <Reveal className="lg:sticky lg:top-32">
                   <p className="text-label text-fg-subtle">0{gi + 1}</p>
@@ -89,7 +92,7 @@ export default function ServicesPage() {
 
       <Process />
       <Engagements />
-      <Faq items={faqs.slice(0, 6)} />
+      <FaqSection items={faqs.slice(0, 6)} />
     </PageTransition>
   );
 }

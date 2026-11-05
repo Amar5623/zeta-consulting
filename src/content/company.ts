@@ -137,7 +137,7 @@ export const faqs = [
   },
   {
     q: "How quickly can you start?",
-    a: "Usually within one to two weeks of agreeing scope. An intro call can happen this week, and a short discovery phase follows right after.",
+    a: "Usually within one to two weeks of agreeing scope. A first conversation can happen this week, and a short discovery phase follows right after.",
   },
   {
     q: "How do you price projects?",

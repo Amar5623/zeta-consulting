@@ -147,6 +147,26 @@
   .group:hover .link-underline {
     background-size: 100% 1px;
   }
+
+  /* Long-form article typography (Insights) */
+  .prose-zeta {
+    @apply text-[1.0625rem] leading-[1.75] text-ink/85;
+  }
+  .prose-zeta > * + * {
+    margin-top: 1.25rem;
+  }
+  .prose-zeta h2 {
+    @apply mt-14 text-h3 text-ink;
+  }
+  .prose-zeta h3 {
+    @apply mt-10 text-h4 text-ink;
+  }
+  .prose-zeta a {
+    @apply underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-accent;
+  }
+  .prose-zeta strong {
+    @apply font-medium text-ink;
+  }
 }
 
 /* ------------------------------------------------------------------

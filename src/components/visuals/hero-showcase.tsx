@@ -4,13 +4,11 @@ import { motion, useInView, useScroll, useTransform } from "motion/react";
 import { Bot, Check, Globe, Lock, ScanSearch } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { site } from "@/content/site";
 import { easeOutExpo } from "@/components/motion/ease";
 
 /**
  * Hero product collage: an illustrative glimpse of the three things Zeta ships —
  * agents, products and visibility. Tilts and scales into place on scroll.
- * Set `site.showreel` to replace it with a video.
  */
 export function HeroShowcase() {
   const ref = useRef<HTMLDivElement>(null);
@@ -30,18 +28,14 @@ export function HeroShowcase() {
           style={{ scale, rotateX, y, transformOrigin: "50% 0%" }}
           className="relative overflow-hidden rounded-xl border border-black/80 bg-night p-2.5 shadow-float sm:p-3"
         >
-          {site.showreel ? (
-            <video src={site.showreel} autoPlay muted loop playsInline className="aspect-video w-full rounded-lg object-cover" />
-          ) : (
-            <div className="bg-grid-light relative grid gap-2.5 rounded-lg sm:gap-3 md:grid-cols-12">
-              <AgentCard className="md:col-span-6 lg:col-span-4" />
-              <ReleaseCard className="hidden lg:col-span-5 lg:flex" />
-              <div className="grid gap-2.5 sm:gap-3 md:col-span-6 lg:col-span-3">
-                <VisibilityCard />
-                <VitalsCard />
-              </div>
+          <div className="bg-grid-light relative grid gap-2.5 rounded-lg sm:gap-3 md:grid-cols-12">
+            <AgentCard className="md:col-span-6 lg:col-span-4" />
+            <ReleaseCard className="hidden lg:col-span-5 lg:flex" />
+            <div className="grid gap-2.5 sm:gap-3 md:col-span-6 lg:col-span-3">
+              <VisibilityCard />
+              <VitalsCard />
             </div>
-          )}
+          </div>
         </motion.div>
       </motion.div>
     </div>

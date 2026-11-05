@@ -7,7 +7,7 @@ import { useLenis } from "lenis/react";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { bookingHref, nav, site } from "@/content/site";
+import { contactHref, nav } from "@/content/site";
 import { serviceGroups, servicesByGroup } from "@/content/services";
 import { Logo } from "@/components/ui/logo";
 import { Button, RollText } from "@/components/ui/button";
@@ -123,8 +123,8 @@ export function Header() {
               <Link href="/contact" className={cn("group hidden h-10 items-center px-4 text-[0.9375rem] md:flex", menuOpen && "md:hidden")}>
                 <RollText>Contact</RollText>
               </Link>
-              <Button href={bookingHref()} size="md" arrow className={cn("hidden sm:inline-flex", menuOpen && "sm:hidden")}>
-                Book a call
+              <Button href={contactHref} size="md" arrow className={cn("hidden sm:inline-flex", menuOpen && "sm:hidden")}>
+                Start a project
               </Button>
               <button
                 type="button"
@@ -183,11 +183,11 @@ export function Header() {
                       <p className="text-h4">
                         Not sure where <span className="accent-serif">to start?</span>
                       </p>
-                      <p className="text-[0.875rem] text-night-muted">A free 30-minute call with a senior lead. We&apos;ll point you to the right approach, even if it isn&apos;t us.</p>
+                      <p className="text-[0.875rem] text-night-muted">Describe the problem. A senior engineer replies within one business day with an honest recommendation, even if it isn&apos;t us.</p>
                     </div>
                     <div className="mt-6 flex flex-col gap-3">
-                      <Button href={bookingHref()} variant="light" size="md" arrow className="w-full justify-between">
-                        Book a call
+                      <Button href={contactHref} variant="light" size="md" arrow className="w-full justify-between">
+                        Start a project
                       </Button>
                       <Link href="/services" className="group inline-flex items-center gap-1 text-[0.875rem] text-night-muted hover:text-white">
                         All services <ArrowUpRight className="size-3.5" />
@@ -201,7 +201,7 @@ export function Header() {
         </div>
       </motion.header>
 
-      <MobileMenu open={menuOpen} email={site.email} />
+      <MobileMenu open={menuOpen} />
     </>
   );
 }

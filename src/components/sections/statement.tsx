@@ -16,7 +16,7 @@ export function Statement() {
             </Reveal>
             <Reveal delay={0.1}>
               <ArrowLink href="/about" className="text-[0.9375rem]">
-                More about Zeta
+                How our team works
               </ArrowLink>
             </Reveal>
           </div>

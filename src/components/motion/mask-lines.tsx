@@ -22,6 +22,8 @@ const line: Variants = {
 };
 
 type MaskLinesProps = {
+  id?: string;
+  "aria-hidden"?: boolean;
   lines: ReactNode[];
   as?: Tag;
   className?: string;
@@ -38,6 +40,8 @@ type MaskLinesProps = {
  * The in-view observer sits on the outer element — the inner spans start clipped.
  */
 export function MaskLines({
+  id,
+  "aria-hidden": ariaHidden,
   lines,
   as = "h2",
   className,
@@ -50,7 +54,7 @@ export function MaskLines({
   const play = trigger === "mount" ? { animate: "show" } : { whileInView: "show", viewport: { once: true, amount: 0.4 } };
 
   return (
-    <Comp className={className} initial="hidden" {...play}>
+    <Comp id={id} aria-hidden={ariaHidden} className={className} initial="hidden" {...play}>
       {lines.map((content, i) => (
         <span key={i} className={cn("block overflow-hidden pb-[0.12em] -mb-[0.12em]", lineClassName)}>
           <motion.span className="block will-change-transform" variants={line} custom={delay + i * stagger}>

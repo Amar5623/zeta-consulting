@@ -5,15 +5,19 @@ import { notFound } from "next/navigation";
 import { ArrowUpRight, Check } from "lucide-react";
 import { getService, services } from "@/content/services";
 import { caseStudies } from "@/content/work";
-import { bookingHref, site } from "@/content/site";
-import { absoluteUrl, jsonLd } from "@/lib/utils";
+import { posts } from "@/content/insights";
+import { contactHref } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
+import { serviceGraph } from "@/lib/schema";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { FaqSection } from "@/components/seo/FaqSection";
 import { Button } from "@/components/ui/button";
 import { Chip, Container, Eyebrow } from "@/components/ui/primitives";
 import { SectionHeader } from "@/components/ui/section-header";
 import { WorkCard } from "@/components/ui/work-card";
+import { PostCard } from "@/components/ui/post-card";
 import { PageTransition } from "@/components/layout/page-transition";
 import { PageHero, PageHeroFallback } from "@/components/sections/page-hero";
-import { Faq } from "@/components/sections/faq";
 import { ServiceSections } from "@/components/sections/service-sections";
 import { MaskLines } from "@/components/motion/mask-lines";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
@@ -26,12 +30,7 @@ export async function generateMetadata({ params }: PageProps<"/services/[slug]">
   const { slug } = await params;
   const s = getService(slug);
   if (!s) return {};
-  return {
-    title: s.title,
-    description: s.short,
-    alternates: { canonical: `/services/${s.slug}` },
-    openGraph: { title: `${s.title} — ${site.name}`, description: s.short, url: `/services/${s.slug}` },
-  };
+  return pageMetadata({ title: `${s.title} Services`, description: s.short, path: `/services/${s.slug}`, ownImage: true });
 }
 
 export default function ServicePage({ params }: PageProps<"/services/[slug]">) {
@@ -50,27 +49,13 @@ async function ServiceContent({ params }: Pick<PageProps<"/services/[slug]">, "p
   if (!s) notFound();
 
   const related = caseStudies.filter((c) => c.services.includes(s.slug)).slice(0, 2);
+  const articles = posts.filter((p) => p.services.includes(s.slug)).slice(0, 2);
   const index = services.findIndex((x) => x.slug === s.slug);
   const next = services[(index + 1) % services.length];
 
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: s.title,
-    description: s.summary,
-    serviceType: s.title,
-    url: absoluteUrl(`/services/${s.slug}`),
-    provider: { "@id": `${site.url}/#organization` },
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: `${s.title} capabilities`,
-      itemListElement: s.capabilities.map((c) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: c } })),
-    },
-  };
-
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
+      <JsonLd data={serviceGraph({ slug: s.slug, name: s.title, serviceType: s.title, description: s.summary, offers: s.capabilities })} />
       <PageHero
         crumbs={[
           { label: "Services", href: "/services" },
@@ -80,7 +65,7 @@ async function ServiceContent({ params }: Pick<PageProps<"/services/[slug]">, "p
         description={s.summary}
       >
         <div className="flex flex-wrap gap-3">
-          <Button href={bookingHref()} arrow>
+          <Button href={contactHref} arrow>
             Discuss your project
           </Button>
           <Button href="#capabilities" variant="secondary">
@@ -186,7 +171,20 @@ async function ServiceContent({ params }: Pick<PageProps<"/services/[slug]">, "p
         </section>
       )}
 
-      <Faq items={s.faqs} title={["Common questions about", <span key="2" className="accent-serif">{s.title}.</span>]} />
+      {articles.length > 0 && (
+        <section className="pb-20 sm:pb-28">
+          <Container className="flex flex-col gap-14">
+            <SectionHeader eyebrow="Further reading" title={["Explainers from", <span key="2" className="accent-serif">our engineers.</span>]} />
+            <div className="grid gap-x-4 gap-y-12 md:grid-cols-2">
+              {articles.map((p) => (
+                <PostCard key={p.slug} post={p} />
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
+
+      <FaqSection items={s.faqs} title={["Common questions about", <span key="2" className="accent-serif">{s.title}.</span>]} />
 
       {/* Next service */}
       <section className="pb-20 sm:pb-28">

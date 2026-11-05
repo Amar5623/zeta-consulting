@@ -6,8 +6,10 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { getIndustry, industries } from "@/content/industries";
 import { getCaseStudy } from "@/content/work";
 import { getService } from "@/content/services";
-import { bookingHref, site } from "@/content/site";
-import { absoluteUrl, jsonLd } from "@/lib/utils";
+import { contactHref } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
+import { industryGraph } from "@/lib/schema";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/button";
 import { Container, Eyebrow } from "@/components/ui/primitives";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -27,12 +29,7 @@ export async function generateMetadata({ params }: PageProps<"/industries/[slug]
   const { slug } = await params;
   const i = getIndustry(slug);
   if (!i) return {};
-  return {
-    title: `${i.name} Solutions`,
-    description: i.valueProp,
-    alternates: { canonical: `/industries/${i.slug}` },
-    openGraph: { title: `${i.name} — ${site.name}`, description: i.headline, url: `/industries/${i.slug}` },
-  };
+  return pageMetadata({ title: `${i.name} Software & AI Solutions`, description: i.valueProp, path: `/industries/${i.slug}`, ownImage: true });
 }
 
 export default function IndustryPage({ params }: PageProps<"/industries/[slug]">) {
@@ -54,19 +51,9 @@ async function IndustryContent({ params }: Pick<PageProps<"/industries/[slug]">,
   const services = industry.services.map((s) => getService(s)).filter((s) => s !== undefined);
   const others = industries.filter((i) => i.slug !== industry.slug);
 
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: `${industry.name} solutions`,
-    description: industry.valueProp,
-    audience: { "@type": "BusinessAudience", name: industry.name },
-    provider: { "@id": `${site.url}/#organization` },
-    url: absoluteUrl(`/industries/${industry.slug}`),
-  };
-
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
+      <JsonLd data={industryGraph({ slug: industry.slug, name: industry.name, description: industry.valueProp })} />
       <PageHero
         crumbs={[
           { label: "Industries", href: "/industries" },
@@ -76,7 +63,7 @@ async function IndustryContent({ params }: Pick<PageProps<"/industries/[slug]">,
         description={industry.valueProp}
       >
         <div className="flex flex-wrap gap-3">
-          <Button href={bookingHref()} arrow>
+          <Button href={contactHref} arrow>
             Discuss your challenge
           </Button>
           {cs && (
@@ -194,7 +181,7 @@ async function IndustryContent({ params }: Pick<PageProps<"/industries/[slug]">,
       {/* Other industries */}
       <section className="pb-20 sm:pb-28">
         <Container className="flex flex-col gap-8 border-t border-line pt-10">
-          <p className="text-label text-fg-subtle">Other industries</p>
+          <h2 className="text-label text-fg-subtle">Other industries</h2>
           <div className="flex flex-wrap gap-2">
             {others.map((o) => (
               <Link key={o.slug} href={`/industries/${o.slug}`} className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2.5 text-[0.9375rem] transition-colors hover:border-ink">

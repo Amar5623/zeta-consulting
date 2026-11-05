@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { bookingHref, nav, site } from "@/content/site";
+import { contactHref, mailtoHref, nav, site, telHref } from "@/content/site";
 import { services } from "@/content/services";
 import { Button } from "@/components/ui/button";
 import { easeInOutQuart, easeOutExpo } from "@/components/motion/ease";
 
 const links = [...nav, { label: "Contact", href: "/contact" }];
 
-export function MobileMenu({ open, email }: { open: boolean; email: string }) {
+export function MobileMenu({ open }: { open: boolean }) {
   return (
     <AnimatePresence>
       {open && (
@@ -56,14 +56,16 @@ export function MobileMenu({ open, email }: { open: boolean; email: string }) {
                 ))}
               </div>
               <div className="flex flex-col gap-4">
-                <Button href={bookingHref()} variant="light" arrow className="w-full justify-between">
-                  Book a free call
+                <Button href={contactHref} variant="light" arrow className="w-full justify-between">
+                  Start a project
                 </Button>
-                <a href={`mailto:${email}`} className="text-center text-night-muted">
-                  {email}
+                <a href={mailtoHref} className="text-center text-night-muted">
+                  {site.email}
+                </a>
+                <a href={telHref} className="text-center text-night-muted">
+                  {site.phoneDisplay}
                 </a>
               </div>
-              <p className="text-center text-[0.8125rem] text-night-muted">{site.address.locality}, {site.address.country}</p>
             </motion.div>
           </div>
         </motion.div>

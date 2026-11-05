@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import type { Industry } from "@/content/industries";
 import { IndustryVisual } from "@/components/visuals/industry-visual";
 
-export function IndustryCard({ industry }: { industry: Industry }) {
+export function IndustryCard({ industry, as: Heading = "h3" }: { industry: Industry; as?: "h2" | "h3" }) {
   return (
     <Link href={`/industries/${industry.slug}`} className="group flex flex-col gap-5">
       <div className="relative overflow-hidden rounded-lg">
@@ -17,7 +17,7 @@ export function IndustryCard({ industry }: { industry: Industry }) {
           <industry.icon className="size-4" strokeWidth={1.6} />
           {industry.number} · {industry.short}
         </p>
-        <h3 className="text-h4">{industry.name}</h3>
+        <Heading className="text-h4">{industry.name}</Heading>
         <p className="line-clamp-2 text-[0.9375rem] text-fg-muted">{industry.headline}</p>
       </div>
     </Link>

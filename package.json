@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:seo": "node scripts/check-seo.mjs",
+    "check": "npm run lint && tsc --noEmit"
   },
   "dependencies": {
     "clsx": "^2.1.1",

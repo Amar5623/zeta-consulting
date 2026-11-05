@@ -1,43 +1,25 @@
 /**
- * Global company details. Everything marked TODO is a placeholder —
- * replace it with your real information before launch.
+ * Global company details — the single source of truth for name, URL and contact channels.
+ * Contact is deliberately simple: the project form on /contact, plus direct email and phone.
  */
 export const site = {
   name: "Zeta Consulting",
   shortName: "Zeta",
-  legalName: "Zeta Consulting", // TODO: registered legal entity name (e.g. "Zeta Consulting Pvt. Ltd.")
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://zetaconsulting.com", // TODO: your domain
+  legalName: "Zeta Consulting",
+  /** Canonical origin. Set NEXT_PUBLIC_SITE_URL in every environment so canonicals never point at staging. */
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://zetaconsulting.in").replace(/\/$/, ""),
+  locale: "en_US",
   tagline: "Technology that moves your business forward.",
   description:
-    "Zeta Consulting designs, builds, integrates and modernizes the digital systems businesses depend on — custom web and mobile platforms, AI agents, industrial IoT, enterprise integrations and AI search visibility.",
+    "Zeta Consulting is a remote-first engineering consultancy that designs, builds and integrates AI agents, web and mobile platforms and digital transformation programs — senior-led, integration-first and measured against your baseline.",
   positioning: "Build smarter systems. Connect what you already use. Turn operational complexity into measurable business value.",
 
-  // Contact
-  email: "hello@zetaconsulting.com", // TODO
-  phone: "+00 00000 00000", // TODO: E.164 format recommended, e.g. "+91 98765 43210"
-  whatsapp: "", // TODO: digits only incl. country code, e.g. "919876543210" — leave empty to hide
-  bookingUrl: "", // TODO: Cal.com / Calendly link — leave empty to route "Book a call" to /contact
-
-  address: {
-    street: "Office address line 1", // TODO
-    locality: "City", // TODO
-    region: "State / Region", // TODO
-    postalCode: "000000", // TODO
-    country: "Country", // TODO
-    mapUrl: "", // TODO: Google Maps share link
-  },
-  hours: "Mon – Fri, 9:00 – 18:00",
+  email: "rahul@zetaconsulting.in",
+  /** E.164 for tel: links and structured data; `phoneDisplay` for people. */
+  phone: "+919158775732",
+  phoneDisplay: "+91 91587 75732",
   responseTime: "We reply within one business day.",
-
-  socials: [
-    { label: "LinkedIn", href: "#" }, // TODO
-    { label: "X / Twitter", href: "#" }, // TODO
-    { label: "Instagram", href: "#" }, // TODO
-    { label: "Clutch", href: "#" }, // TODO
-  ],
-
-  /** Optional hero showreel. Put a file in /public/media and set e.g. "/media/showreel.mp4". */
-  showreel: "",
+  workingModel: "Remote-first. We work with teams worldwide.",
 } as const;
 
 export const nav = [
@@ -48,10 +30,8 @@ export const nav = [
   { label: "Insights", href: "/insights" },
 ] as const;
 
-export function bookingHref() {
-  return site.bookingUrl || "/contact";
-}
+/** Where every "start a project" CTA points. */
+export const contactHref = "/contact";
 
-export function whatsappHref() {
-  return site.whatsapp ? `https://wa.me/${site.whatsapp}` : "";
-}
+export const mailtoHref = `mailto:${site.email}`;
+export const telHref = `tel:${site.phone}`;
